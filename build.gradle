@@ -1,0 +1,43 @@
+buildscript {
+    apply plugin: 'hyperskill'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$hs.spring.bootVersion"
+        classpath "io.spring.gradle:dependency-management-plugin:$hs.spring.dependencyManagementVersion"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets.main.resources.srcDirs = ["src/resources"]
+
+// Enforce Java 17 to prevent Spring Boot startup crashes
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Added in Stage 3: For @Valid, @NotNull, etc.
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Added in Stage 4 & 6: For saving quizzes to the database and pagination
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'com.h2database:h2'
+
+    // Added in Stage 5: For user registration and authorization
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+}

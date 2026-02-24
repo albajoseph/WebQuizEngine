@@ -1,0 +1,15 @@
+# Gradle files
+.gradle/
+build/
+
+# Database files
+quizdb.mv.db
+quizdb.trace.db
+
+# IDE files
+.idea/
+*.iml
+out/
+
+# OS files
+.DS_Store
